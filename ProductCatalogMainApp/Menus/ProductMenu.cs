@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualBasic;
-using ProductCatalogMainApp.Models;
-using ProductCatalogMainApp.Services;
+using ProductCatalogResources.Models;
+using ProductCatalogResources.Services;
 using System;
 
 namespace ProductCatalogMainApp.Menus;
-internal static class MenuService
+public static class MenuService
 {
 
     private static readonly ProductService _productService = new ProductService();
@@ -27,6 +27,8 @@ internal static class MenuService
         Console.WriteLine(response.Message);
         Console.WriteLine($"Product ID: {product.ProductId}");
 
+        Console.WriteLine("Press any key to continue.");
+
     }
 
     private static void ListAllProductsMenu()
@@ -46,33 +48,40 @@ internal static class MenuService
         {
             Console.WriteLine("No product was found");
         }
+
+        Console.WriteLine("Press any key to continue.");
     }
 
-    private static void RemoveProductMenu()
+    private static string RemoveProductMenu()
     {
         Console.Clear();
         Console.WriteLine("--- Remove product from the list ---");
 
-        Console.Write("Enter product name to remove: ");
-        var answer = Console.ReadLine() ?? "";
-
-        for (int iCount = 0; iCount < _products.Count; iCount++)
+        var products = _productService.GetAllProducts();
+        if (products != null)
         {
-            if (_products[iCount].ProductName.Equals(answer))
+            foreach (var product in _productService.GetAllProducts())
             {
-                _products.Remove[iCount];
+                Console.WriteLine($"{product.ProductName} // {product.ProductPrice} // Product ID: {product.ProductId}");
             }
         }
-
-
-        if ( )
+        else
         {
-            Product.Remove();
+            Console.WriteLine("No product was found");
         }
 
+        Console.Write("Copy and enter product ID to remove: ");
+        var productId = Console.ReadLine() ?? "";
 
-        var response = _productService.RemoveProduct();
-        Console.WriteLine(response.Message);
+       var result = _productService.RemoveProduct(productId);
+
+
+        Console.WriteLine(result.Message);
+
+        Console.WriteLine("Press any key to continue.");
+
+        return productId!;
+
     }
 
     private static void ExitApplicationMenu()

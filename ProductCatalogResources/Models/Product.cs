@@ -1,4 +1,4 @@
-﻿namespace ProductCatalogMainApp.Models;
+﻿namespace ProductCatalogResources.Models;
 
 public class Product
 {

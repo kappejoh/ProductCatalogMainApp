@@ -1,5 +1,5 @@
 ﻿using ProductCatalogMainApp.Menus;
-using ProductCatalogMainApp.Services;
+using ProductCatalogResources.Services;
 
 while (true)
 {

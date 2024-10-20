@@ -1,5 +1,5 @@
-﻿using ProductCatalogMainApp.Models;
-using ProductCatalogMainApp.Services;
+﻿using ProductCatalogResources.Models;
+using ProductCatalogResources.Services;
 
 namespace ProductCatalogMainApp.Menus;
 
